@@ -15,7 +15,15 @@ class HomepageViewModel : ViewModel(){
     }
 
     private fun fetchFoodList() {
-        fRepo.fetchFoodList()
+        fRepo.fetchAllFoodItems()
+    }
+
+    fun addToCart(food: Food){
+        fRepo.addToCart(food)
+    }
+
+    fun getCart() {
+        fRepo.getFoodInCart()
     }
 
 }

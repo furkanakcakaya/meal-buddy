@@ -8,9 +8,11 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.furkanakcakaya.mealbuddy.R
 import com.furkanakcakaya.mealbuddy.databinding.AllFoodsItemBinding
+import com.furkanakcakaya.mealbuddy.entities.Cart
 import com.furkanakcakaya.mealbuddy.entities.Food
 import com.furkanakcakaya.mealbuddy.fragments.HomepageFragmentDirections
 import com.furkanakcakaya.mealbuddy.viewmodels.HomepageViewModel
+import com.squareup.picasso.Picasso
 
 class FoodAdapter(
     private var mContext: Context,
@@ -31,14 +33,24 @@ class FoodAdapter(
         val b = holder.binding
         b.foodItem = food
 
+        changeImage(food.picName, b.ivFood)
+
         b.cvFood.setOnClickListener {
-            val nav = HomepageFragmentDirections.actionHomepageFragmentToFoodDetailFragment(food)
+            var cart :Cart = Cart(food.id, food.name, food.picName, food.price, "0", "furkanakcakaya")
+            val nav = HomepageFragmentDirections.actionHomepageFragmentToFoodDetailFragment(cart)
             Navigation.findNavController(it).navigate(nav)
         }
     }
 
     override fun getItemCount(): Int {
         return items.size
+    }
+
+    private fun changeImage(imageName:String, imageView: android.widget.ImageView){
+        val url = "http://kasimadalan.pe.hu/yemekler/resimler/$imageName"
+        Picasso.get()
+            .load(url)
+            .into(imageView)
     }
 
 }

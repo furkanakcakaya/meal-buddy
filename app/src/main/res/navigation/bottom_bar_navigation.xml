@@ -31,7 +31,7 @@
         android:label="FoodDetailFragment"
         tools:layout="@layout/fragment_food_detail">
         <argument
-            android:name="currentFood"
-            app:argType="com.furkanakcakaya.mealbuddy.entities.Food" />
+            android:name="currentCart"
+            app:argType="com.furkanakcakaya.mealbuddy.entities.Cart" />
     </fragment>
 </navigation>
