@@ -20,5 +20,18 @@
         android:id="@+id/homepageFragment"
         android:name="com.furkanakcakaya.mealbuddy.fragments.HomepageFragment"
         android:label="HomepageFragment"
-        tools:layout="@layout/fragment_homepage"/>
+        tools:layout="@layout/fragment_homepage">
+        <action
+            android:id="@+id/action_homepageFragment_to_foodDetailFragment"
+            app:destination="@id/foodDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodDetailFragment"
+        android:name="com.furkanakcakaya.mealbuddy.fragments.FoodDetailFragment"
+        android:label="FoodDetailFragment"
+        tools:layout="@layout/fragment_food_detail">
+        <argument
+            android:name="currentFood"
+            app:argType="com.furkanakcakaya.mealbuddy.entities.Food" />
+    </fragment>
 </navigation>

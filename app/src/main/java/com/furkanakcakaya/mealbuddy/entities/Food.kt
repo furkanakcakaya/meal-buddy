@@ -1,9 +1,10 @@
 package com.furkanakcakaya.mealbuddy.entities
 
-data class FoodItem(
+import java.io.Serializable
+
+data class Food(
     var id: Int,
     var name: String,
     var picName: String,
-    var price: Int,
-    var oldPrice: Int
-)
+    var price: Int
+) : Serializable
