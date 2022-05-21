@@ -97,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="@{() -> foodDetailFragment.decreaseCount()}"
+                    android:onClick="@{() -> foodDetailFragment.decreaseCount(cartObject)}"
                     app:srcCompat="@drawable/remove" />
 
                 <TextView
@@ -119,7 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="@{() -> foodDetailFragment.increaseCount()}"
+                    android:onClick="@{() -> foodDetailFragment.increaseCount(cartObject)}"
                     app:srcCompat="@drawable/add" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -129,7 +129,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="64dp"
-            android:text="Sepete Ekle"
+            android:text="@string/add_to_cart"
+            android:onClick="@{() -> foodDetailFragment.buttonAddToCart(cartObject)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -140,7 +141,7 @@
             android:id="@+id/tvDetailsPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="₺ 12.99"
+            android:text="@{@string/tvPrice(cartObject.foodPrice)}"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/cvCount"
             app:layout_constraintEnd_toEndOf="@+id/cvDetails"

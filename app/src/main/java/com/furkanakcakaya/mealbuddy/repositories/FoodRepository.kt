@@ -3,6 +3,7 @@ package com.furkanakcakaya.mealbuddy.repositories
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.furkanakcakaya.mealbuddy.entities.Cart
 import com.furkanakcakaya.mealbuddy.entities.CartResponse
 import com.furkanakcakaya.mealbuddy.entities.Food
 import com.furkanakcakaya.mealbuddy.entities.FoodResponse
@@ -13,21 +14,41 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.Field
 
-class FoodRepository {
+object FoodRepository {
     private val TAG = "FoodRepository"
     private var allFoodItems: MutableLiveData<List<Food>> = MutableLiveData<List<Food>>()
+    private var currentCart: MutableLiveData<List<Cart>> = MutableLiveData<List<Cart>>()
     private var apiService: ApiService = ApiUtils.getApiService()
 
-    fun getItems():LiveData<List<Food>>{
+    init {
+        fetchAllFoodItems()
+        fetchCart()
+    }
+
+    fun getFoods():LiveData<List<Food>>{
         return allFoodItems
     }
 
-    fun fetchAllFoodItems() {
+    fun getCart():LiveData<List<Cart>>{
+        return currentCart
+    }
+
+    private fun fetchAllFoodItems() {
         apiService.getAllFoodItems().enqueue(object: Callback<FoodResponse> {
             override fun onResponse(call: Call<FoodResponse>, response: Response<FoodResponse>) {
                 allFoodItems.value = response.body().foods
             }
             override fun onFailure(call: Call<FoodResponse>?, t: Throwable?) {}
+        })
+    }
+
+    private fun fetchCart() {
+        apiService.getCartItems("furkanakcakaya").enqueue(object: Callback<CartResponse> {
+            override fun onResponse(call: Call<CartResponse>, response: Response<CartResponse>) {
+                currentCart.value = response.body().message
+            }
+
+            override fun onFailure(call: Call<CartResponse>?, t: Throwable?) {}
         })
     }
 
@@ -47,16 +68,9 @@ class FoodRepository {
         })
     }
 
-    fun getFoodInCart() {
-        apiService.getCartItems("furkanakcakaya").enqueue(object: Callback<CartResponse> {
-            override fun onResponse(call: Call<CartResponse>, response: Response<CartResponse>) {
-                response.body().message.forEach {
-                    Log.i(TAG, "onResponse: $it")
-                }
-            }
 
-            override fun onFailure(call: Call<CartResponse>?, t: Throwable?) {}
-        })
+
+    fun updateCart(cartObject: Cart) {
     }
 
 

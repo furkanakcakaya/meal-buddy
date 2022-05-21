@@ -36,6 +36,7 @@ android {
 }
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: "kotlin-kapt"
 
 dependencies {
 

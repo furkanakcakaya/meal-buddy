@@ -36,9 +36,10 @@ class FoodAdapter(
         changeImage(food.picName, b.ivFood)
 
         b.cvFood.setOnClickListener {
-            var cart :Cart = Cart(food.id, food.name, food.picName, food.price, "0", "furkanakcakaya")
+            var cart :Cart = Cart("-1", food.name, food.picName, food.price, "0", "furkanakcakaya")
             val nav = HomepageFragmentDirections.actionHomepageFragmentToFoodDetailFragment(cart)
             Navigation.findNavController(it).navigate(nav)
+
         }
     }
 
