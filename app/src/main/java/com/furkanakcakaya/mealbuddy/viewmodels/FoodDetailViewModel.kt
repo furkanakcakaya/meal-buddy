@@ -4,6 +4,7 @@ import android.R
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.furkanakcakaya.mealbuddy.entities.Cart
+import com.furkanakcakaya.mealbuddy.entities.Food
 import com.furkanakcakaya.mealbuddy.repositories.FoodRepository
 
 
@@ -14,8 +15,21 @@ class FoodDetailViewModel : ViewModel() {
     fun addToCart(cartObject: Cart) {
         if (cartObject.cartFoodId == "-1"){
             Log.d(TAG, "addToCart: Food Id is -1")
-            return
+            fRepo.addToCart(
+                cartObject.foodName,
+                cartObject.foodPicture,
+                cartObject.foodPrice,
+                cartObject.foodQuantity,
+                cartObject.orderUsername
+            )
+        }else{
+            fRepo.updateCartItem(
+                cartObject.cartFoodId,
+                cartObject.foodName,
+                cartObject.foodPicture,
+                cartObject.foodPrice,
+                cartObject.foodQuantity,
+                cartObject.orderUsername)
         }
-        fRepo.updateCart(cartObject)
     }
 }

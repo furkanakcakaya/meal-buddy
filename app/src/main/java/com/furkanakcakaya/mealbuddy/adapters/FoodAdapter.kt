@@ -39,7 +39,6 @@ class FoodAdapter(
             var cart :Cart = Cart("-1", food.name, food.picName, food.price, "0", "furkanakcakaya")
             val nav = HomepageFragmentDirections.actionHomepageFragmentToFoodDetailFragment(cart)
             Navigation.findNavController(it).navigate(nav)
-
         }
     }
 

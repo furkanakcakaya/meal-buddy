@@ -30,4 +30,7 @@ interface ApiService {
     @FormUrlEncoded
     fun deleteCartItem(@Field("sepet_yemek_id") foodId: String, @Field("kullanici_adi") orderUsername: String): Call<CartResponse>
 
+
+
+
 }

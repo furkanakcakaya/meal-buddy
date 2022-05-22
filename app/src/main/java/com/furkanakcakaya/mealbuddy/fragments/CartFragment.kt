@@ -29,8 +29,9 @@ class CartFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_cart, container, false)
 
         viewmodel.currentCart.observe(viewLifecycleOwner) {
-            binding.adapter = CartAdapter(requireContext(), it)
+            binding.adapter = CartAdapter(requireContext(), it, viewmodel)
         }
+
 
         return binding.root
     }

@@ -39,8 +39,7 @@ class FoodDetailFragment : Fragment() {
         return binding.root
     }
 
-    fun loadImage(view:ImageView, imageUrl: String){
-        Log.i(TAG, "loadImage: ")
+    private fun loadImage(view:ImageView, imageUrl: String){
         Picasso.get()
             .load("http://kasimadalan.pe.hu/yemekler/resimler/$imageUrl")
             .placeholder(R.drawable.placeholder)
@@ -67,6 +66,10 @@ class FoodDetailFragment : Fragment() {
     }
 
     fun buttonAddToCart(cartObject: Cart){
-        viewModel.addToCart(cartObject)
+        if (cartObject.foodQuantity.toInt() > 0){
+            viewModel.addToCart(cartObject)
+        }else{
+            Snackbar.make(binding.root,"You can't add zero quantity to your cart.",Snackbar.LENGTH_SHORT).show()
+        }
     }
 }
