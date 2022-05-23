@@ -11,21 +11,15 @@ class CartViewModel : ViewModel() {
     private val fRepo = FoodRepository
     var currentCart: LiveData<List<Cart>> = fRepo.getCart()
 
-    fun removeCartItem(cartFoodId: String) {
-        fRepo.removeFromCart(cartFoodId)
+    fun removeCartItem(cartFoodId: String, orderUsername: String) {
+        fRepo.removeFromCart(cartFoodId, orderUsername)
     }
 
     fun updateCartItem(cartItem: Cart){
         if (cartItem.foodQuantity.toInt() == 0 ){
-            fRepo.removeFromCart(cartItem.cartFoodId)
+            fRepo.removeFromCart(cartItem.cartFoodId, cartItem.orderUsername)
         }else{
-            fRepo.updateCartItem(
-                cartItem.cartFoodId,
-                cartItem.foodName,
-                cartItem.foodPicture,
-                cartItem.foodPrice,
-                cartItem.foodQuantity,
-                cartItem.orderUsername)
+            fRepo.updateCartItem(cartItem)
         }
     }
 }

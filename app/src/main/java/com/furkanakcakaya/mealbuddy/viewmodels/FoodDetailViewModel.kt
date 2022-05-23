@@ -15,21 +15,9 @@ class FoodDetailViewModel : ViewModel() {
     fun addToCart(cartObject: Cart) {
         if (cartObject.cartFoodId == "-1"){
             Log.d(TAG, "addToCart: Food Id is -1")
-            fRepo.addToCart(
-                cartObject.foodName,
-                cartObject.foodPicture,
-                cartObject.foodPrice,
-                cartObject.foodQuantity,
-                cartObject.orderUsername
-            )
+            fRepo.addToCart(cartObject)
         }else{
-            fRepo.updateCartItem(
-                cartObject.cartFoodId,
-                cartObject.foodName,
-                cartObject.foodPicture,
-                cartObject.foodPrice,
-                cartObject.foodQuantity,
-                cartObject.orderUsername)
+            fRepo.updateCartItem(cartObject)
         }
     }
 }

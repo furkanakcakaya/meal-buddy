@@ -31,8 +31,6 @@ class CartFragment : Fragment() {
         viewmodel.currentCart.observe(viewLifecycleOwner) {
             binding.adapter = CartAdapter(requireContext(), it, viewmodel)
         }
-
-
         return binding.root
     }
 }

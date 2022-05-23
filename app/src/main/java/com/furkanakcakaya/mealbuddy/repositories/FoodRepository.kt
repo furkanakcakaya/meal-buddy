@@ -22,7 +22,7 @@ object FoodRepository {
 
     init {
         fetchAllFoodItems()
-        fetchCart()
+        fetchCart("furkanakcakaya")
     }
 
     fun getFoods():LiveData<List<Food>>{
@@ -42,69 +42,55 @@ object FoodRepository {
         })
     }
 
-    private fun fetchCart() {
-        apiService.getCartItems("furkanakcakaya").enqueue(object: Callback<CartResponse> {
+    private fun fetchCart(orderUsername: String) {
+        apiService.getCartItems(orderUsername).enqueue(object: Callback<CartResponse> {
             override fun onResponse(call: Call<CartResponse>, response: Response<CartResponse>) {
                 currentCart.value = response.body().message.sortedBy { it.foodName }
             }
-
             override fun onFailure(call: Call<CartResponse>?, t: Throwable?) {}
         })
     }
 
-    fun addToCart(
-        foodName: String,
-        foodPicName: String,
-        foodPrice: String,
-        foodQuantity: String,
-        username: String
-    ){
+    fun addToCart(cart: Cart){
         apiService.addFoodToCart(
-            foodName,
-            foodPicName,
-            foodPrice,
-            foodQuantity,
-            username
+            cart.foodName,
+            cart.foodPicture,
+            cart.foodPrice,
+            cart.foodQuantity,
+            cart.orderUsername
         ).enqueue(object: Callback<CartResponse> {
             override fun onResponse(call: Call<CartResponse>?, response: Response<CartResponse>?) {
-                fetchCart()
+                fetchCart(cart.orderUsername)
             }
-
             override fun onFailure(call: Call<CartResponse>?, t: Throwable?) {}
         })
     }
 
-    fun removeFromCart(cartFoodId: String){
+    fun removeFromCart(cartFoodId: String, orderUsername: String){
         apiService.deleteCartItem(
             cartFoodId,
-            "furkanakcakaya" //TODO: Change this to orderUsername > SHARED PREFS
+            orderUsername //TODO: Change this to orderUsername > SHARED PREFS
         ).enqueue(object: Callback<CartResponse> {
             override fun onResponse(call: Call<CartResponse>?, response: Response<CartResponse>?) {
-                fetchCart()
+                fetchCart(orderUsername)
             }
             override fun onFailure(call: Call<CartResponse>?, t: Throwable?) {}
         })
     }
 
-    fun updateCartItem(
-        cartFoodId: String,
-        foodName: String,
-        foodPicName: String,
-        foodPrice: String,
-        foodQuantity: String,
-        username: String) {
-        apiService.deleteCartItem(cartFoodId,username).enqueue(object: Callback<CartResponse> {
+    fun updateCartItem(cart: Cart) {
+        apiService.deleteCartItem(cart.cartFoodId,cart.orderUsername).enqueue(object: Callback<CartResponse> {
             override fun onResponse(call: Call<CartResponse>?, response: Response<CartResponse>?) {
                 apiService.addFoodToCart(
-                    foodName,
-                    foodPicName,
-                    foodPrice,
-                    foodQuantity,
-                    username
+                    cart.foodName,
+                    cart.foodPicture,
+                    cart.foodPrice,
+                    cart.foodQuantity,
+                    cart.orderUsername
                 ).enqueue(object: Callback<CartResponse> {
                     override fun onResponse(call: Call<CartResponse>?, response: Response<CartResponse>?) {
                         Log.i(TAG, "onResponse: updated")
-                        fetchCart()
+                        fetchCart(cart.orderUsername)
                     }
 
                     override fun onFailure(call: Call<CartResponse>?, t: Throwable?) {}
@@ -112,13 +98,16 @@ object FoodRepository {
             }
             override fun onFailure(call: Call<CartResponse>?, t: Throwable?) {}
         })
-
-
     }
 
-    fun removeCartItem(cart: Cart) {
-
+    fun clearCart() {
+        currentCart.value!!.forEach {
+            apiService.deleteCartItem(it.cartFoodId,it.orderUsername).enqueue(object: Callback<CartResponse> {
+                override fun onResponse(call: Call<CartResponse>?, response: Response<CartResponse>?) {
+                    Log.i(TAG, "onResponse: deleted")
+                }
+                override fun onFailure(call: Call<CartResponse>?, t: Throwable?) {}
+            })
+        }
     }
-
-
 }

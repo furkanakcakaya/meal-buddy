@@ -71,7 +71,7 @@ class CartAdapter (
         Snackbar.make(binding.root, "${cartItem.foodName} silinsin mi?", Snackbar.LENGTH_LONG).setAction(
             "Evet"
         ) {
-            viewModel.removeCartItem(cartItem.cartFoodId)
+            viewModel.removeCartItem(cartItem.cartFoodId, cartItem.orderUsername)
         }.show()
     }
 }
