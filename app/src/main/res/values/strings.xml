@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">Meal Buddy</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_to_cart">Sepete Ekle</string>
     <string name="tvPrice">₺ %s</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="current_username">Geçerli kullanıcı: %s</string>
 </resources>

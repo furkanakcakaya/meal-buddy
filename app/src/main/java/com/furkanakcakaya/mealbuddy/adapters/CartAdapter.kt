@@ -21,7 +21,6 @@ class CartAdapter (
         ): RecyclerView.Adapter<CartAdapter.ViewHolder>() {
     inner class ViewHolder(val binding: CartItemBinding): RecyclerView.ViewHolder(binding.root)
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding : CartItemBinding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.cart_item, parent, false)
         return ViewHolder(binding)
@@ -30,29 +29,37 @@ class CartAdapter (
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val cartItem = cartList[position]
         holder.binding.cartItem = cartItem
-        loadImage(holder.binding.ivCart,cartItem.foodPicture)
 
-        holder.binding.ivRemove.setOnClickListener {
-            removeItem(holder.binding, cartItem)
-        }
+        if (cartItem.foodPicture == "") {
+            holder.binding.ivCart.setImageResource(R.drawable.cart)
+            holder.binding.cvCount.visibility = ViewGroup.GONE
+            holder.binding.tvCartPrice.visibility = ViewGroup.GONE
+            holder.binding.ivRemove.visibility = ViewGroup.GONE
+        } else {
+            loadImage(holder.binding.ivCart,cartItem.foodPicture)
 
-        holder.binding.ivCartDecrease.setOnClickListener {
-            if (cartItem.foodQuantity.toInt() > 1){
-                cartItem.foodQuantity = (cartItem.foodQuantity.toInt() - 1).toString()
-                holder.binding.cartItem = cartItem
-                viewModel.updateCartItem(cartItem)
-            }else{
+            holder.binding.ivRemove.setOnClickListener {
                 removeItem(holder.binding, cartItem)
             }
-        }
 
-        holder.binding.ivCartIncrease.setOnClickListener {
-            if (cartItem.foodQuantity.toInt() < 9){
-                cartItem.foodQuantity = (cartItem.foodQuantity.toInt() + 1).toString()
-                holder.binding.cartItem = cartItem
-                viewModel.updateCartItem(cartItem)
-            }else{
-                Snackbar.make(holder.binding.root, "Maximum quantity is 9", Snackbar.LENGTH_SHORT).show()
+            holder.binding.ivCartDecrease.setOnClickListener {
+                if (cartItem.foodQuantity.toInt() > 1){
+                    cartItem.foodQuantity = (cartItem.foodQuantity.toInt() - 1).toString()
+                    holder.binding.cartItem = cartItem
+                    viewModel.updateCartItem(cartItem)
+                }else{
+                    removeItem(holder.binding, cartItem)
+                }
+            }
+
+            holder.binding.ivCartIncrease.setOnClickListener {
+                if (cartItem.foodQuantity.toInt() < 9){
+                    cartItem.foodQuantity = (cartItem.foodQuantity.toInt() + 1).toString()
+                    holder.binding.cartItem = cartItem
+                    viewModel.updateCartItem(cartItem)
+                }else{
+                    Snackbar.make(holder.binding.root, "Maximum quantity is 9", Snackbar.LENGTH_SHORT).show()
+                }
             }
         }
     }

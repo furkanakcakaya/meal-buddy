@@ -45,19 +45,22 @@
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvCartFoodName"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+                    android:maxLength="22"
                     android:text="@{cartItem.foodName}"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/cvCount"
                     app:layout_constraintStart_toEndOf="@+id/ivCart"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/tvCartPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -65,7 +68,7 @@
                     android:textSize="12sp"
                     android:textStyle="italic"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView5" />
+                    app:layout_constraintStart_toStartOf="@+id/tvCartFoodName" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvCount"
