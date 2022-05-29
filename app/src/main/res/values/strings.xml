@@ -1,6 +1,25 @@
 <resources>
+    <!--    English language-->
     <string name="app_name">Meal Buddy</string>
-    <string name="add_to_cart">Sepete Ekle</string>
-    <string name="tvPrice">₺ %s</string>
-    <string name="current_username">Geçerli kullanıcı: %s</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="current_username">Current user: %s</string>
+    <string name="food_price">$%s</string>
+    <string name="username">Username</string>
+    <string name="save">Save</string>
+    <string name="cart">Cart</string>
+    <string name="homepage">Homepage</string>
+    <string name="account">Account</string>
+    <string name="clear">Clear</string>
+
+    <string name="remove_cart_item">Are you sure you want to delete %s?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO!</string>
+
+    <string name="clear_cart">Are you sure you want to clear cart?</string>
+    <string name="cart_total">Cart total: $%d</string>
+    <string name="cart_empty">Cart is empty</string>
+
+    <string name="add_zero">You can\'t add zero quantity to your cart.</string>
+    <string name="min_quantity">Minimum quantity is 0</string>
+    <string name="max_quantity">Maximum quantity is 9</string>
 </resources>

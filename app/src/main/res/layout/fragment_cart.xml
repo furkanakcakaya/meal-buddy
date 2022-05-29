@@ -7,7 +7,7 @@
         <variable name="CartFragment" type="com.furkanakcakaya.mealbuddy.fragments.CartFragment" />
         <variable name="adapter" type="com.furkanakcakaya.mealbuddy.adapters.CartAdapter" />
         <variable name="username" type="String" />
-
+        <variable name="tbCartTitle" type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +33,7 @@
                 android:background="?attr/colorPrimary"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
-                app:title="Sepetim" />
+                app:title="@{tbCartTitle}" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView

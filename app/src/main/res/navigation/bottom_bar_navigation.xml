@@ -23,7 +23,8 @@
         tools:layout="@layout/fragment_homepage">
         <action
             android:id="@+id/action_homepageFragment_to_foodDetailFragment"
-            app:destination="@id/foodDetailFragment" />
+            app:destination="@id/foodDetailFragment"
+            app:popUpTo="@id/bottom_bar_navigation" />
     </fragment>
     <fragment
         android:id="@+id/foodDetailFragment"
@@ -33,5 +34,9 @@
         <argument
             android:name="currentCart"
             app:argType="com.furkanakcakaya.mealbuddy.entities.Cart" />
+        <action
+            android:id="@+id/action_foodDetailFragment_to_cartFragment"
+            app:destination="@id/cartFragment"
+            app:popUpTo="@id/bottom_bar_navigation" />
     </fragment>
 </navigation>

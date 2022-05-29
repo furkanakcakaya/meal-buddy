@@ -141,7 +141,7 @@
             android:id="@+id/tvDetailsPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/tvPrice(cartObject.foodPrice)}"
+            android:text="@{@string/food_price(cartObject.foodPrice)}"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/cvCount"
             app:layout_constraintEnd_toEndOf="@+id/cvDetails"

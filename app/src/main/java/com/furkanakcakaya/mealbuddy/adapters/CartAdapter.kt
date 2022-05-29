@@ -1,7 +1,6 @@
 package com.furkanakcakaya.mealbuddy.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -75,8 +74,9 @@ class CartAdapter (
     }
 
     private fun removeItem(binding: CartItemBinding, cartItem: Cart){
-        Snackbar.make(binding.root, "${cartItem.foodName} silinsin mi?", Snackbar.LENGTH_LONG).setAction(
-            "Evet"
+
+        Snackbar.make(binding.root, mContext.getString(R.string.remove_cart_item,cartItem.foodName), Snackbar.LENGTH_LONG).setAction(
+            mContext.getString(R.string.yes)
         ) {
             viewModel.removeCartItem(cartItem.cartFoodId, cartItem.orderUsername)
         }.show()

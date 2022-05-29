@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="toolbarTitle" type="String" />
         <variable name="adapter" type="com.furkanakcakaya.mealbuddy.adapters.FoodAdapter" />
     </data>
 
@@ -31,7 +30,7 @@
                 android:background="?attr/colorPrimary"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
-                app:title="@{toolbarTitle}" />
+                app:title="@string/homepage" />
         </androidx.cardview.widget.CardView>
 
         <androidx.core.widget.NestedScrollView

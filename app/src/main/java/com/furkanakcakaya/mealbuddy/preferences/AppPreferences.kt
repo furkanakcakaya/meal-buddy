@@ -9,9 +9,8 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.first
 
 class AppPreferences(var context: Context) {
-    private val Context.ds : DataStore<Preferences> by preferencesDataStore("preferences")
-
     companion object{
+        private val Context.ds : DataStore<Preferences> by preferencesDataStore("preferences")
         val USERNAME_KEY = stringPreferencesKey("USERNAME")
     }
 

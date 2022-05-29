@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    Turkish language-->
+    <string name="app_name">Meal Buddy</string>
+    <string name="add_to_cart">Sepete ekle</string>
+    <string name="current_username">Kullanıcı: %s</string>
+    <string name="food_price">%s ₺</string>
+    <string name="username">Kullanıcı Adı:</string>
+    <string name="save">Kaydet</string>
+    <string name="cart">Sepet</string>
+    <string name="homepage">Anasayfa</string>
+    <string name="account">Hesap</string>
+    <string name="clear">Temizle</string>
+
+    <string name="remove_cart_item">%s sepetten çıkarılacak, emin misin?</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır!</string>
+
+    <string name="clear_cart">Sepeti temizlemek istediğine emin misin?</string>
+    <string name="cart_total">Sepet toplamı: %d ₺</string>
+    <string name="cart_empty">Sepet boş</string>
+
+    <string name="add_zero">Sepetine 0 adet ekleme yapamazsın.</string>
+    <string name="min_quantity">Adet bilgisi negatif olamaz.</string>
+    <string name="max_quantity">En fazla 0 adet ekleme yapabilirsin</string>
+</resources>

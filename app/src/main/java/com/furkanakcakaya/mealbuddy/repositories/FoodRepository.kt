@@ -9,7 +9,6 @@ import com.furkanakcakaya.mealbuddy.entities.Food
 import com.furkanakcakaya.mealbuddy.entities.FoodResponse
 import com.furkanakcakaya.mealbuddy.retrofit.ApiService
 import com.furkanakcakaya.mealbuddy.retrofit.ApiUtils
-import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,6 +23,11 @@ object FoodRepository {
     init {
         fetchAllFoodItems()
         fetchCart(username)
+    }
+
+    fun setUsername(username:String){
+        this.username = username
+        fetchCart(FoodRepository.username)
     }
 
     fun getFoods():LiveData<List<Food>>{
@@ -49,8 +53,7 @@ object FoodRepository {
                 currentCart.value = response.body().message.sortedBy { it.foodName }
             }
             override fun onFailure(call: Call<CartResponse>?, t: Throwable?) {Log.d(TAG, "onFailure: ${t?.message}")
-                //Means that the cart is empty
-                currentCart.value = listOf(
+                 currentCart.value = listOf(
                     Cart(
                         foodName = "Cart is empty",
                         foodPrice = "0",
@@ -105,10 +108,8 @@ object FoodRepository {
                     cart.orderUsername
                 ).enqueue(object: Callback<CartResponse> {
                     override fun onResponse(call: Call<CartResponse>?, response: Response<CartResponse>?) {
-                        Log.i(TAG, "onResponse: updated")
                         fetchCart(cart.orderUsername)
                     }
-
                     override fun onFailure(call: Call<CartResponse>?, t: Throwable?) {}
                 })
             }
@@ -117,11 +118,11 @@ object FoodRepository {
     }
 
     fun clearCart() {
-        //TODO: Clear cart doesnt work properly. debug it
-        currentCart.value!!.forEach {
-            apiService.deleteCartItem(it.cartFoodId,it.orderUsername).enqueue(object: Callback<CartResponse> {
+        val cartRemove = currentCart.value!!
+        for (cartItem in cartRemove){
+            apiService.deleteCartItem(cartItem.cartFoodId,cartItem.orderUsername).enqueue(object: Callback<CartResponse> {
                 override fun onResponse(call: Call<CartResponse>?, response: Response<CartResponse>?) {
-                    Log.i(TAG, "onResponse: Cart Cleared.")
+                    Log.i(TAG, "onResponse: Cart item removed.")
                 }
                 override fun onFailure(call: Call<CartResponse>?, t: Throwable?) {}
             })

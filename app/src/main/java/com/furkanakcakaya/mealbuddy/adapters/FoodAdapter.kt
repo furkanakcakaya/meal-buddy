@@ -19,7 +19,6 @@ class FoodAdapter(
     private var items: List<Food>,
     var viewModel: HomepageViewModel
 ) : RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
-    private val TAG = "FoodAdapter"
     inner class FoodViewHolder(var binding: AllFoodsItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
@@ -36,10 +35,10 @@ class FoodAdapter(
         changeImage(food.picName, b.ivFood)
 
         b.cvFood.setOnClickListener {
-            var cart = if (viewModel.checkIfFoodIsInCart(food)) {
+            val cart = if (viewModel.checkIfFoodIsInCart(food)) {
                 viewModel.getCartItem(food.name)
             } else {
-                Cart("-1", food.name, food.picName, food.price, "1", "furkanakcakaya")
+                Cart("-1", food.name, food.picName, food.price, "1",viewModel.getUsername())
             }
             val nav = HomepageFragmentDirections.actionHomepageFragmentToFoodDetailFragment(cart)
             Navigation.findNavController(it).navigate(nav)
