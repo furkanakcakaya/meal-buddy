@@ -23,4 +23,5 @@
     <string name="add_zero">Sepetine 0 adet ekleme yapamazsın.</string>
     <string name="min_quantity">Adet bilgisi negatif olamaz.</string>
     <string name="max_quantity">En fazla 0 adet ekleme yapabilirsin</string>
+    <string name="food_details">Yemek Detayı</string>
 </resources>

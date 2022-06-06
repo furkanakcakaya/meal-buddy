@@ -22,4 +22,5 @@
     <string name="add_zero">You can\'t add zero quantity to your cart.</string>
     <string name="min_quantity">Minimum quantity is 0</string>
     <string name="max_quantity">Maximum quantity is 9</string>
+    <string name="food_details">Food Details</string>
 </resources>
